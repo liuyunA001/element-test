@@ -28,21 +28,33 @@ st.markdown("""
     /* 确保所有文本元素都有足够的对比度 */
     .stRadio label,
     .stTextInput label,
-    .stMarkdown {
+    .stMarkdown,
+    .stWrite {
         color: #ffffff !important;
         font-weight: 500;
     }
-    /* 选项文本颜色 */
-    .stRadio div[role="radiogroup"] label {
+    /* 选项文本颜色 - 更具体的选择器 */
+    .stRadio div[role="radiogroup"] label,
+    .stRadio div[role="radiogroup"] div label {
         color: #ffffff !important;
+        font-weight: 500;
     }
     /* 选中的选项样式 */
     .stRadio input[type="radio"]:checked + label {
         color: #00ff99 !important;
+        font-weight: 600;
+    }
+    /* 确保单选按钮容器的文本颜色 */
+    .stRadio {
+        color: #ffffff !important;
+    }
+    /* 确保所有文本元素的颜色 */
+    * {
+        color: #ffffff !important;
     }
     .stButton>button {
         background: linear-gradient(90deg, #ff6b6b, #ee5a24);
-        color: white;
+        color: white !important;
         border: none;
         border-radius: 20px;
         padding: 0.8rem 2.5rem;
@@ -57,7 +69,7 @@ st.markdown("""
         background: rgba(72, 219, 251, 0.15);
         border-radius: 12px;
         border: 1px solid #48dbfb;
-        color: #ffffff;
+        color: #ffffff !important;
     }
 </style>
 """, unsafe_allow_html=True)
