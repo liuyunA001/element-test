@@ -14,8 +14,8 @@ st.markdown("""
 <style>
     /* 全局背景和基础颜色 */
     .stApp {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        color: #ffffff;
+        background: linear-gradient(135deg, #f0f4f8 0%, #e9ecef 100%);
+        color: #333333;
     }
     
     /* 标题样式 */
