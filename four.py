@@ -12,67 +12,68 @@ st.set_page_config(
 # 自定义CSS美化（仅改样式，不影响功能）
 st.markdown("""
 <style>
+    /* 全局背景和基础颜色 */
     .stApp {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         color: #ffffff;
     }
+    
+    /* 标题样式 */
     h1 {
         text-align: center;
         color: #00ff99;
         text-shadow: 0 0 8px #00ff99;
         font-size: 2.5rem;
     }
+    
     h2, h3 {
         color: #66ccff;
     }
-    /* 确保所有文本元素都有足够的对比度 */
-    .stRadio label,
-    .stMarkdown,
-    .stWrite {
-        color: #ffffff !important;
-        font-weight: 500;
-    }
-    /* 输入框标签使用黑色，确保清晰可见 */
-    .stTextInput label {
+    
+    /* 输入框标签 - 使用黑色 */
+    label {
         color: #000000 !important;
-        font-weight: 600;
+        font-weight: 600 !important;
     }
-    /* 选项文本颜色 - 更具体的选择器 */
-    .stRadio div[role="radiogroup"] label,
-    .stRadio div[role="radiogroup"] div label {
+    
+    /* 单选按钮选项 - 使用白色 */
+    div[role="radiogroup"] label {
         color: #ffffff !important;
-        font-weight: 500;
+        font-weight: 500 !important;
     }
-    /* 选中的选项样式 */
-    .stRadio input[type="radio"]:checked + label {
+    
+    /* 选中的单选按钮选项 */
+    div[role="radiogroup"] input[type="radio"]:checked + label {
         color: #00ff99 !important;
-        font-weight: 600;
+        font-weight: 600 !important;
     }
-    /* 确保单选按钮容器的文本颜色 */
-    .stRadio {
-        color: #ffffff !important;
-    }
-    /* 确保所有文本元素的颜色 */
-    * {
-        color: #ffffff !important;
-    }
-    .stButton>button {
-        background: linear-gradient(90deg, #ff6b6b, #ee5a24);
+    
+    /* 按钮样式 */
+    button {
+        background: linear-gradient(90deg, #ff6b6b, #ee5a24) !important;
         color: white !important;
-        border: none;
-        border-radius: 20px;
-        padding: 0.8rem 2.5rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
+        border: none !important;
+        border-radius: 20px !important;
+        padding: 0.8rem 2.5rem !important;
+        font-weight: 600 !important;
+        transition: all 0.3s ease !important;
     }
-    .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    
+    button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4) !important;
     }
+    
+    /* 成功提示框 */
     .stSuccess {
-        background: rgba(72, 219, 251, 0.15);
-        border-radius: 12px;
-        border: 1px solid #48dbfb;
+        background: rgba(72, 219, 251, 0.15) !important;
+        border-radius: 12px !important;
+        border: 1px solid #48dbfb !important;
+        color: #ffffff !important;
+    }
+    
+    /* 确保所有文本元素的颜色 */
+    .stMarkdown, .stWrite {
         color: #ffffff !important;
     }
 </style>
