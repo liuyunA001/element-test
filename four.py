@@ -32,11 +32,10 @@ st.markdown("""
         color: #ffffff !important;
         font-weight: 500;
     }
-    /* 输入框标签使用亮青色，确保清晰可见 */
+    /* 输入框标签使用黑色，确保清晰可见 */
     .stTextInput label {
-        color: #00ff99 !important;
+        color: #000000 !important;
         font-weight: 600;
-        text-shadow: 0 0 3px rgba(0, 255, 153, 0.5);
     }
     /* 选项文本颜色 - 更具体的选择器 */
     .stRadio div[role="radiogroup"] label,
