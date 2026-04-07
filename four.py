@@ -1,71 +1,69 @@
 import math
 import streamlit as st
 
-# ====================== 最小美化：页面配置（只改布局，不改逻辑） ======================
+# ====================== 页面配置与样式（仅美化，不碰核心逻辑） ======================
 st.set_page_config(
     page_title="元素人格测试仪",
     page_icon="🧪",
-    layout="centered",  # 居中布局，更美观，不影响功能
+    layout="centered",
     initial_sidebar_state="collapsed"
 )
 
-# 极简自定义 CSS：只加深色背景和文字美化，不改动任何组件逻辑
+# 自定义CSS美化（仅改样式，不影响功能）
 st.markdown("""
 <style>
-    /* 全局深色背景，不影响原有组件布局 */
     .stApp {
-        background: #121212;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         color: #ffffff;
     }
-    /* 标题美化，居中发光，不碰原有标题文字 */
     h1 {
         text-align: center;
         color: #00ff99;
         text-shadow: 0 0 8px #00ff99;
         font-size: 2.5rem;
     }
-    /* 子标题颜色，更清晰 */
-    h2 {
+    h2, h3 {
         color: #66ccff;
     }
-    /* 按钮渐变美化，hover 有动画，不改变点击逻辑 */
     .stButton>button {
-        background: linear-gradient(90deg, #00ccff, #0066ff);
+        background: linear-gradient(90deg, #ff6b6b, #ee5a24);
         color: white;
         border: none;
         border-radius: 20px;
-        padding: 0.6rem 2rem;
+        padding: 0.8rem 2.5rem;
         font-weight: 600;
         transition: all 0.3s ease;
     }
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 204, 255, 0.5);
+        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    }
+    .stSuccess {
+        background: rgba(72, 219, 251, 0.15);
+        border-radius: 12px;
+        border: 1px solid #48dbfb;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# ====================== 以下是你的核心代码，一字未改 ======================
-st.title("✨ 元素人格测试仪 ✨")  # 只加了两个星星装饰，标题内容不变
+# ====================== 页面标题（仅加装饰，内容不变） ======================
+st.title("✨ 元素人格测试仪 ✨")
 
-# 初始化分数，避免未答题时报错（保留你原本的逻辑）
+# 初始化分数（避免未答题报错）
 if "fire_score" not in st.session_state:
     st.session_state.fire_score = 0
     st.session_state.water_score = 0
 
-# ====================== 1. 用户基础信息输入（保留原样） ======================
+# ====================== 1. 用户信息输入（完全保留原样） ======================
 name = st.text_input("输入你的代号：", "见习炼金术士")
 
-# ====================== 2. 题目作答与计分模块（你的题目、选项、计分完全不变） ======================
+# ====================== 2. 题目作答（你的题目、选项、计分100%不变） ======================
 st.subheader("📝 请完成以下3道题目，选择最符合你的选项")
 
-# 题目1：完全保留你的原内容
+# 题目1
 q1 = st.radio(
     "【题目1】A door here",
-    options=[
-        "选项A:open",
-        "选项B:left"
-    ],
+    options=["选项A:open", "选项B:left"],
     key="q1",
     horizontal=True
 )
@@ -76,13 +74,10 @@ else:
     st.session_state.fire_score += 0
     st.session_state.water_score += 5
 
-# 题目2：完全保留你的原内容
+# 题目2
 q2 = st.radio(
     "【题目2】which one you want to use to fight",
-    options=[
-        "选项A:book",
-        "选项B:ball"
-    ],
+    options=["选项A:book", "选项B:ball"],
     key="q2",
     horizontal=True
 )
@@ -93,13 +88,10 @@ else:
     st.session_state.fire_score += 0
     st.session_state.water_score += 5
 
-# 题目3：完全保留你的原内容
+# 题目3
 q3 = st.radio(
     "【题目3】a bottle of water on the table",
-    options=[
-        "选项A:drink",
-        "选项B:look"
-    ],
+    options=["选项A:drink", "选项B:look"],
     key="q3",
     horizontal=True
 )
@@ -110,10 +102,10 @@ else:
     st.session_state.fire_score += 0
     st.session_state.water_score += 5
 
-# 最终用户分数（保留你原本的变量）
+# 最终用户分数（保留原变量）
 user = [st.session_state.fire_score, st.session_state.water_score]
 
-# ====================== 3. 人格模板与匹配算法（你的核心逻辑完全不变） ======================
+# ====================== 3. 人格模板与匹配算法（核心逻辑完全不变） ======================
 profiles = {
     "烈焰型": [10, 3],
     "潮汐型": [3, 10],
@@ -121,7 +113,7 @@ profiles = {
     "雷霆大王": [5, 9]
 }
 
-# ====================== 4. 匹配结果展示（保留原样，只加个标题） ======================
+# ====================== 4. 结果展示（仅美化，逻辑不变） ======================
 st.subheader("准备开始匹配")
 if st.button("开始最终匹配"):
     min_dist = 999999.0
@@ -137,4 +129,3 @@ if st.button("开始最终匹配"):
 
     st.balloons()
     st.success(f"{name}，你最接近的模板是：{best_match},最小距离为:{min_dist}")
-                st.experimental_rerun()
