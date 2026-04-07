@@ -27,11 +27,16 @@ st.markdown("""
     }
     /* 确保所有文本元素都有足够的对比度 */
     .stRadio label,
-    .stTextInput label,
     .stMarkdown,
     .stWrite {
         color: #ffffff !important;
         font-weight: 500;
+    }
+    /* 输入框标签使用亮青色，确保清晰可见 */
+    .stTextInput label {
+        color: #00ff99 !important;
+        font-weight: 600;
+        text-shadow: 0 0 3px rgba(0, 255, 153, 0.5);
     }
     /* 选项文本颜色 - 更具体的选择器 */
     .stRadio div[role="radiogroup"] label,
@@ -135,10 +140,10 @@ user = [st.session_state.fire_score, st.session_state.water_score]
 
 # ====================== 3. 人格模板与匹配算法（核心逻辑完全不变） ======================
 profiles = {
-    "烈焰型": [10, 3],
-    "潮汐型": [3, 10],
-    "平衡游侠": [7, 7],
-    "雷霆大王": [5, 9]
+    "🔥 烈焰型": [10, 3],
+    "💧潮汐型": [3, 10],
+    "⚖️平衡游侠": [7, 7],
+    "⚡雷霆大王": [5, 9]
 }
 
 # ====================== 4. 结果展示（仅美化，逻辑不变） ======================
