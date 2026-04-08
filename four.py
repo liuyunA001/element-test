@@ -9,48 +9,48 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 自定义CSS美化（仅改样式，不影响功能）
+# 自定义CSS美化（修改背景为蓝色系，调整字体颜色保证可读性）
 st.markdown("""
 <style>
-    /* 全局背景和基础颜色 */
+    /* 全局背景和基础颜色 - 改为蓝色渐变背景 */
     .stApp {
-        background: linear-gradient(135deg, #f0f4f8 0%, #e9ecef 100%);
-        color: #333333;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: #ffffff; /* 全局字体改为白色，确保在蓝色背景上清晰 */
     }
     
-    /* 标题样式 */
+    /* 标题样式 - 调整为更协调的亮色 */
     h1 {
         text-align: center;
-        color: #00ff99;
-        text-shadow: 0 0 8px #00ff99;
+        color: #87ceeb;
+        text-shadow: 0 0 8px #87ceeb;
         font-size: 2.5rem;
     }
     
     h2, h3 {
-        color: #66ccff;
+        color: #b0e0e6;
     }
     
-    /* 输入框标签 - 使用黑色 */
+    /* 输入框标签 - 改为浅灰色确保清晰 */
     label {
-        color: #000000 !important;
+        color: #f0f8ff !important;
         font-weight: 600 !important;
     }
     
-    /* 单选按钮选项 - 使用白色 */
+    /* 单选按钮选项 - 白色字体 */
     div[role="radiogroup"] label {
         color: #ffffff !important;
         font-weight: 500 !important;
     }
     
-    /* 选中的单选按钮选项 */
+    /* 选中的单选按钮选项 - 高亮色调整 */
     div[role="radiogroup"] input[type="radio"]:checked + label {
-        color: #00ff99 !important;
+        color: #87ceeb !important;
         font-weight: 600 !important;
     }
     
-    /* 按钮样式 */
+    /* 按钮样式 - 调整为与蓝色背景协调的配色 */
     button {
-        background: linear-gradient(90deg, #ff6b6b, #ee5a24) !important;
+        background: linear-gradient(90deg, #4682b4, #5f9ea0) !important;
         color: white !important;
         border: none !important;
         border-radius: 20px !important;
@@ -61,20 +61,26 @@ st.markdown("""
     
     button:hover {
         transform: translateY(-2px) !important;
-        box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4) !important;
+        box-shadow: 0 4px 15px rgba(70, 130, 180, 0.6) !important;
     }
     
-    /* 成功提示框 */
+    /* 成功提示框 - 调整为蓝色系 */
     .stSuccess {
-        background: rgba(72, 219, 251, 0.15) !important;
+        background: rgba(135, 206, 235, 0.2) !important;
         border-radius: 12px !important;
-        border: 1px solid #48dbfb !important;
+        border: 1px solid #87ceeb !important;
         color: #ffffff !important;
     }
     
     /* 确保所有文本元素的颜色 */
     .stMarkdown, .stWrite {
         color: #ffffff !important;
+    }
+    
+    /* 输入框样式优化 - 确保在蓝色背景上清晰 */
+    input[type="text"] {
+        background-color: rgba(255, 255, 255, 0.9) !important;
+        color: #1e3c72 !important;
     }
 </style>
 """, unsafe_allow_html=True)
