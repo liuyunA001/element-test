@@ -1,7 +1,7 @@
 import math
 import streamlit as st
 
-# ====================== 页面配置与样式（优化单选按钮+背景） ======================
+# ====================== 页面配置与样式（方案2：高级粉紫风格） ======================
 st.set_page_config(
     page_title="元素人格测试仪",
     page_icon="🧪",
@@ -9,16 +9,16 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 🔧 优化后的CSS：彻底解决单选按钮颜色问题，增强对比度
+# 🔧 方案2：粉紫主题CSS，高对比度+视觉统一
 st.markdown("""
 <style>
-    /* 全局背景：深蓝色渐变，保持视觉统一 */
+    /* 全局背景：深邃蓝紫渐变，高级感拉满 */
     .stApp {
-        background: linear-gradient(135deg, #165DFF 0%, #0F389E 100%);
+        background: linear-gradient(135deg, #165DFF 0%, #7B2CBF 100%);
         color: #ffffff;
     }
 
-    /* 标题样式：高亮白色+发光效果，更醒目 */
+    /* 标题样式：纯白+发光，醒目不刺眼 */
     h1 {
         text-align: center;
         color: #ffffff;
@@ -39,8 +39,8 @@ st.markdown("""
         font-size: 1.1rem !important;
     }
 
-    /* ====================== 核心优化：单选按钮样式 ====================== */
-    /* 单选按钮容器：增加背景，提升层级 */
+    /* ====================== 核心优化：单选按钮样式（粉紫主题） ====================== */
+    /* 单选按钮容器：半透明白色背景，提升层级 */
     div[role="radiogroup"] {
         background-color: rgba(255, 255, 255, 0.1);
         border-radius: 12px;
@@ -62,34 +62,34 @@ st.markdown("""
         font-size: 1.05rem !important;
     }
 
-    /* 选中的单选按钮：亮黄色填充+白色边框，极致醒目 */
+    /* 选中的单选按钮：樱花粉填充+白色边框，极致醒目 */
     div[role="radiogroup"] input[type="radio"]:checked {
-        accent-color: #FFD700 !important;
+        accent-color: #FF6EC7 !important;
     }
 
-    /* 选中的选项文字：亮黄色，和按钮颜色呼应 */
+    /* 选中的选项文字：樱花粉，和按钮颜色呼应 */
     div[role="radiogroup"] input[type="radio"]:checked + label {
-        color: #FFD700 !important;
+        color: #FF6EC7 !important;
         font-weight: 700 !important;
         font-size: 1.1rem !important;
     }
 
-    /* ====================== 按钮样式优化 ====================== */
+    /* ====================== 按钮样式优化（粉紫渐变） ====================== */
     button {
-        background: linear-gradient(90deg, #FFD700, #FFA500) !important;
-        color: #0F389E !important;
+        background: linear-gradient(90deg, #FF6EC7, #C77DFF) !important;
+        color: #ffffff !important;
         border: none !important;
         border-radius: 25px !important;
         padding: 1rem 3rem !important;
         font-weight: 700 !important;
         font-size: 1.1rem !important;
         transition: all 0.3s ease !important;
-        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4) !important;
+        box-shadow: 0 4px 15px rgba(255, 110, 199, 0.4) !important;
     }
 
     button:hover {
         transform: translateY(-3px) !important;
-        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6) !important;
+        box-shadow: 0 6px 20px rgba(255, 110, 199, 0.6) !important;
     }
 
     /* ====================== 其他元素优化 ====================== */
@@ -109,11 +109,11 @@ st.markdown("""
         font-size: 1.05rem !important;
     }
 
-    /* 输入框样式：纯白背景+深蓝色文字，绝对清晰 */
+    /* 输入框样式：纯白背景+粉紫边框，绝对清晰 */
     input[type="text"] {
         background-color: #ffffff !important;
-        color: #0F389E !important;
-        border: 2px solid #FFD700 !important;
+        color: #7B2CBF !important;
+        border: 2px solid #FF6EC7 !important;
         border-radius: 8px !important;
         padding: 0.8rem !important;
         font-size: 1.1rem !important;
@@ -122,8 +122,13 @@ st.markdown("""
 
     /* 输入框聚焦时高亮 */
     input[type="text"]:focus {
-        border-color: #FFA500 !important;
-        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3) !important;
+        border-color: #C77DFF !important;
+        box-shadow: 0 0 0 3px rgba(255, 110, 199, 0.3) !important;
+    }
+
+    /* 顶部Share栏适配粉紫主题 */
+    .stDeployButton, .stToolbar {
+        background: linear-gradient(90deg, #FF6EC7, #C77DFF) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -131,15 +136,15 @@ st.markdown("""
 # ====================== 页面标题 ======================
 st.title("✨ 元素人格测试仪 ✨")
 
-# 初始化分数
+# 初始化分数（避免未答题报错）
 if "fire_score" not in st.session_state:
     st.session_state.fire_score = 0
     st.session_state.water_score = 0
 
-# ====================== 1. 用户信息输入 ======================
+# ====================== 1. 用户信息输入（完全保留原样） ======================
 name = st.text_input("输入你的代号：", "见习炼金术士")
 
-# ====================== 2. 题目作答 ======================
+# ====================== 2. 题目作答（题目、选项、计分100%不变） ======================
 st.subheader("📝 请完成以下3道题目，选择最符合你的选项")
 
 # 题目1
@@ -184,10 +189,10 @@ else:
     st.session_state.fire_score += 0
     st.session_state.water_score += 5
 
-# 最终用户分数
+# 最终用户分数（保留原变量）
 user = [st.session_state.fire_score, st.session_state.water_score]
 
-# ====================== 3. 人格模板与匹配算法 ======================
+# ====================== 3. 人格模板与匹配算法（核心逻辑完全不变） ======================
 profiles = {
     "🔥 烈焰型": [10, 3],
     "💧潮汐型": [3, 10],
@@ -195,7 +200,7 @@ profiles = {
     "⚡雷霆大王": [5, 9]
 }
 
-# ====================== 4. 结果展示 ======================
+# ====================== 4. 结果展示（仅美化，逻辑不变） ======================
 st.subheader("准备开始匹配")
 if st.button("开始最终匹配"):
     min_dist = 999999.0
