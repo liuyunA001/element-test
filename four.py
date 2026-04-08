@@ -1,7 +1,7 @@
 import math
 import streamlit as st
 
-# ====================== 页面配置与样式（仅美化，不碰核心逻辑） ======================
+# ====================== 页面配置与样式（优化单选按钮+背景） ======================
 st.set_page_config(
     page_title="元素人格测试仪",
     page_icon="🧪",
@@ -9,94 +9,137 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 自定义CSS美化（修改背景为蓝色系，调整字体颜色保证可读性）
+# 🔧 优化后的CSS：彻底解决单选按钮颜色问题，增强对比度
 st.markdown("""
 <style>
-    /* 全局背景和基础颜色 - 改为蓝色渐变背景 */
+    /* 全局背景：深蓝色渐变，保持视觉统一 */
     .stApp {
-        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-        color: #ffffff; /* 全局字体改为白色，确保在蓝色背景上清晰 */
+        background: linear-gradient(135deg, #165DFF 0%, #0F389E 100%);
+        color: #ffffff;
     }
-    
-    /* 标题样式 - 调整为更协调的亮色 */
+
+    /* 标题样式：高亮白色+发光效果，更醒目 */
     h1 {
         text-align: center;
-        color: #87ceeb;
-        text-shadow: 0 0 8px #87ceeb;
-        font-size: 2.5rem;
+        color: #ffffff;
+        text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
     }
-    
+
     h2, h3 {
-        color: #b0e0e6;
+        color: #ffffff;
+        font-weight: 700;
     }
-    
-    /* 输入框标签 - 改为浅灰色确保清晰 */
+
+    /* 输入框标签：纯白加粗，绝对清晰 */
     label {
-        color: #f0f8ff !important;
-        font-weight: 600 !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        font-size: 1.1rem !important;
     }
-    
-    /* 单选按钮选项 - 白色字体 */
+
+    /* ====================== 核心优化：单选按钮样式 ====================== */
+    /* 单选按钮容器：增加背景，提升层级 */
+    div[role="radiogroup"] {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    /* 未选中的单选按钮：白色边框+透明填充，清晰可见 */
+    div[role="radiogroup"] input[type="radio"] {
+        accent-color: #ffffff !important;
+        transform: scale(1.3);
+        margin-right: 0.8rem !important;
+    }
+
+    /* 未选中的选项文字：纯白，高对比度 */
     div[role="radiogroup"] label {
         color: #ffffff !important;
-        font-weight: 500 !important;
+        font-weight: 600 !important;
+        font-size: 1.05rem !important;
     }
-    
-    /* 选中的单选按钮选项 - 高亮色调整 */
+
+    /* 选中的单选按钮：亮黄色填充+白色边框，极致醒目 */
+    div[role="radiogroup"] input[type="radio"]:checked {
+        accent-color: #FFD700 !important;
+    }
+
+    /* 选中的选项文字：亮黄色，和按钮颜色呼应 */
     div[role="radiogroup"] input[type="radio"]:checked + label {
-        color: #87ceeb !important;
-        font-weight: 600 !important;
+        color: #FFD700 !important;
+        font-weight: 700 !important;
+        font-size: 1.1rem !important;
     }
-    
-    /* 按钮样式 - 调整为与蓝色背景协调的配色 */
+
+    /* ====================== 按钮样式优化 ====================== */
     button {
-        background: linear-gradient(90deg, #4682b4, #5f9ea0) !important;
-        color: white !important;
+        background: linear-gradient(90deg, #FFD700, #FFA500) !important;
+        color: #0F389E !important;
         border: none !important;
-        border-radius: 20px !important;
-        padding: 0.8rem 2.5rem !important;
-        font-weight: 600 !important;
+        border-radius: 25px !important;
+        padding: 1rem 3rem !important;
+        font-weight: 700 !important;
+        font-size: 1.1rem !important;
         transition: all 0.3s ease !important;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4) !important;
     }
-    
+
     button:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 15px rgba(70, 130, 180, 0.6) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6) !important;
     }
-    
-    /* 成功提示框 - 调整为蓝色系 */
+
+    /* ====================== 其他元素优化 ====================== */
+    /* 成功提示框：白色边框+半透明背景 */
     .stSuccess {
-        background: rgba(135, 206, 235, 0.2) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
         border-radius: 12px !important;
-        border: 1px solid #87ceeb !important;
+        border: 2px solid #ffffff !important;
         color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
     }
-    
-    /* 确保所有文本元素的颜色 */
+
+    /* 确保所有文本元素为白色 */
     .stMarkdown, .stWrite {
         color: #ffffff !important;
+        font-size: 1.05rem !important;
     }
-    
-    /* 输入框样式优化 - 确保在蓝色背景上清晰 */
+
+    /* 输入框样式：纯白背景+深蓝色文字，绝对清晰 */
     input[type="text"] {
-        background-color: rgba(255, 255, 255, 0.9) !important;
-        color: #1e3c72 !important;
+        background-color: #ffffff !important;
+        color: #0F389E !important;
+        border: 2px solid #FFD700 !important;
+        border-radius: 8px !important;
+        padding: 0.8rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+    }
+
+    /* 输入框聚焦时高亮 */
+    input[type="text"]:focus {
+        border-color: #FFA500 !important;
+        box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3) !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# ====================== 页面标题（仅加装饰，内容不变） ======================
+# ====================== 页面标题 ======================
 st.title("✨ 元素人格测试仪 ✨")
 
-# 初始化分数（避免未答题报错）
+# 初始化分数
 if "fire_score" not in st.session_state:
     st.session_state.fire_score = 0
     st.session_state.water_score = 0
 
-# ====================== 1. 用户信息输入（完全保留原样） ======================
+# ====================== 1. 用户信息输入 ======================
 name = st.text_input("输入你的代号：", "见习炼金术士")
 
-# ====================== 2. 题目作答（你的题目、选项、计分100%不变） ======================
+# ====================== 2. 题目作答 ======================
 st.subheader("📝 请完成以下3道题目，选择最符合你的选项")
 
 # 题目1
@@ -141,10 +184,10 @@ else:
     st.session_state.fire_score += 0
     st.session_state.water_score += 5
 
-# 最终用户分数（保留原变量）
+# 最终用户分数
 user = [st.session_state.fire_score, st.session_state.water_score]
 
-# ====================== 3. 人格模板与匹配算法（核心逻辑完全不变） ======================
+# ====================== 3. 人格模板与匹配算法 ======================
 profiles = {
     "🔥 烈焰型": [10, 3],
     "💧潮汐型": [3, 10],
@@ -152,7 +195,7 @@ profiles = {
     "⚡雷霆大王": [5, 9]
 }
 
-# ====================== 4. 结果展示（仅美化，逻辑不变） ======================
+# ====================== 4. 结果展示 ======================
 st.subheader("准备开始匹配")
 if st.button("开始最终匹配"):
     min_dist = 999999.0
