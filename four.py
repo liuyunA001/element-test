@@ -1,7 +1,7 @@
 import math
 import streamlit as st
 
-# ====================== 页面配置与样式（方案2：高级粉紫风格） ======================
+# ====================== 页面配置与样式（粉紫主题+最终优化） ======================
 st.set_page_config(
     page_title="元素人格测试仪",
     page_icon="🧪",
@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 🔧 方案2：粉紫主题CSS，高对比度+视觉统一
+# 🔧 最终优化CSS：解决文字颜色+结果醒目问题
 st.markdown("""
 <style>
     /* 全局背景：深邃蓝紫渐变，高级感拉满 */
@@ -39,7 +39,7 @@ st.markdown("""
         font-size: 1.1rem !important;
     }
 
-    /* ====================== 核心优化：单选按钮样式（粉紫主题） ====================== */
+    /* ====================== 核心优化：单选按钮样式（粉紫主题+纯白文字） ====================== */
     /* 单选按钮容器：半透明白色背景，提升层级 */
     div[role="radiogroup"] {
         background-color: rgba(255, 255, 255, 0.1);
@@ -55,7 +55,7 @@ st.markdown("""
         margin-right: 0.8rem !important;
     }
 
-    /* 未选中的选项文字：纯白，高对比度 */
+    /* 未选中的选项文字：纯白，高对比度（解决黑色问题） */
     div[role="radiogroup"] label {
         color: #ffffff !important;
         font-weight: 600 !important;
@@ -92,18 +92,25 @@ st.markdown("""
         box-shadow: 0 6px 20px rgba(255, 110, 199, 0.6) !important;
     }
 
-    /* ====================== 其他元素优化 ====================== */
-    /* 成功提示框：白色边框+半透明背景 */
+    /* ====================== 关键优化：结果文字（原绿色改为亮黄色） ====================== */
+    /* 成功提示框：白色边框+半透明背景+亮黄色文字 */
     .stSuccess {
         background: rgba(255, 255, 255, 0.15) !important;
         border-radius: 12px !important;
         border: 2px solid #ffffff !important;
-        color: #ffffff !important;
-        font-weight: 600 !important;
+        color: #FFD700 !important; /* 亮黄色，极致醒目 */
+        font-weight: 700 !important;
+        font-size: 1.2rem !important;
+    }
+
+    /* 强制所有Streamlit默认绿色结果文字为亮黄色 */
+    .element-container div[data-testid="stMarkdownContainer"] p {
+        color: #FFD700 !important;
+        font-weight: 700 !important;
         font-size: 1.1rem !important;
     }
 
-    /* 确保所有文本元素为白色 */
+    /* 确保所有普通文本元素为白色 */
     .stMarkdown, .stWrite {
         color: #ffffff !important;
         font-size: 1.05rem !important;
