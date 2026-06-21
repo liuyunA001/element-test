@@ -187,15 +187,15 @@ GLOBAL_CSS = """
 
     /* 按钮通用样式（含呼吸光晕） */
     .stButton > button {
-        background: rgba(255, 215, 0, 0.08) !important;
-        border: 1px solid rgba(255, 215, 0, 0.4) !important;
+        background: rgba(255, 215, 0, 0.12) !important;
+        border: 1px solid rgba(255, 215, 0, 0.5) !important;
         border-radius: 40px !important;
-        color: #ffd700 !important;
+        color: #ffe9a0 !important;
         font-family: 'Cinzel', serif !important;
         padding: 0.6rem 1.8rem !important;
         transition: all 0.4s ease !important;
-        box-shadow: 0 0 15px rgba(255,215,0,0.1) !important;
-        backdrop-filter: blur(4px);
+        box-shadow: 0 0 20px rgba(255,215,0,0.15) !important;
+        backdrop-filter: blur(6px);
         animation: btnBreath 3s ease-in-out infinite;
     }
     @keyframes btnBreath {
@@ -253,6 +253,7 @@ GLOBAL_CSS = """
         border: 1px solid rgba(255,215,0,0.1) !important;
         transition: all 0.3s ease !important;
         cursor: pointer;
+         color: #e0d0ff !important; 
     }
     .stRadio label:hover {
         background: rgba(255,215,0,0.08) !important;
