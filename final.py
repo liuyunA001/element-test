@@ -253,13 +253,15 @@ GLOBAL_CSS = """
         border: 1px solid rgba(255,215,0,0.1) !important;
         transition: all 0.3s ease !important;
         cursor: pointer;
-         color: #e0d0ff !important; 
+        color: #e0d0ff !important;
+        font-weight: 400 !important;
     }
     .stRadio label:hover {
         background: rgba(255,215,0,0.08) !important;
         border-color: #ffd700 !important;
         transform: translateX(8px);
         box-shadow: 0 0 20px rgba(255,215,0,0.1);
+        color: #ffffff !important;
     }
     .stRadio label:active {
         transform: scale(0.98);
@@ -269,6 +271,7 @@ GLOBAL_CSS = """
         background: rgba(255,215,0,0.15) !important;
         border-color: #ffd700 !important;
         box-shadow: 0 0 30px rgba(255,215,0,0.2);
+        color: #ffd700 !important;
     }
 
     /* Tabs 等已有样式保留 */
@@ -397,7 +400,7 @@ def render_quiz():
                 st.warning("请选择一个选项")
     st.markdown("</div>", unsafe_allow_html=True)
 
-# ---------- 结果页（您提供的完整函数，我将其整合并稍作调整） ----------
+# ---------- 结果页 ----------
 def show_results():
     """结果展示页 – 暗黑星空塔罗风格（完整）"""
     # 安全过滤
@@ -426,7 +429,6 @@ def show_results():
     p_color = colors[primary]
     s_color = colors[secondary]
 
-    # 分析数据（原样保留）
     analysis_data = {
         "fire": {
             "mbti": "ESTP / ENTJ",
@@ -468,7 +470,6 @@ def show_results():
     p_ana = analysis_data[primary]
     s_ana = analysis_data[secondary]
 
-    # 雷达图数据
     radar_dims = {
         "fire": [95, 70, 40, 60, 85, 90],
         "water": [40, 95, 60, 95, 50, 45],
@@ -477,7 +478,6 @@ def show_results():
     }
     dim_names = ["领导力", "共情力", "稳定性", "创意力", "逻辑力", "行动力"]
 
-    # 塔罗牌
     tarot_cards = [
         {"name": "太阳", "emoji": "☀️", "meaning": "光明与成功", "love": "感情升温，单身者有望遇到良缘", "career": "工作顺利，项目取得突破性进展", "health": "精力充沛，心情愉悦", "advice": "保持积极，好运正在降临"},
         {"name": "月亮", "emoji": "🌙", "meaning": "直觉与潜意识", "love": "感情需要用心经营，信任是关键", "career": "小心谨慎，避免冲动决策", "health": "注意休息，放松身心", "advice": "相信直觉，倾听内心声音"},
@@ -489,7 +489,6 @@ def show_results():
         {"name": "力量", "emoji": "💪", "meaning": "勇气与内在力量", "love": "敢于表达，突破障碍", "career": "克服困难，展现能力", "health": "体能充沛", "advice": "相信自己的力量"}
     ]
 
-    # 幸运数据
     if st.session_state.lucky_data is None:
         lucky_num = random.randint(1, 99)
         lucky_colors = ["#FFD700", "#C44CFF", "#4ECDC4", "#FF6B6B", "#74B9FF", "#FF6B9D", "#57C84D"]
@@ -502,7 +501,7 @@ def show_results():
     else:
         lucky_num, lucky_color, lucky_item, lucky_direction = st.session_state.lucky_data
 
-    # ========== 全局 CSS ==========
+    # 结果页内部CSS（略，可直接复用全局背景）
     st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap');
@@ -510,49 +509,6 @@ def show_results():
             background: radial-gradient(ellipse at 50% 30%, #1a1a3e 0%, #0f0c29 70%, #020011 100%) !important;
             font-family: 'Inter', sans-serif;
             color: #e0d0ff;
-        }
-        .stApp::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 0;
-            pointer-events: none;
-            background:
-                radial-gradient(2px 2px at 20% 30%, rgba(255,215,0,0.15), transparent),
-                radial-gradient(2px 2px at 40% 70%, rgba(196, 76, 255, 0.12), transparent),
-                radial-gradient(3px 3px at 60% 20%, rgba(255,215,0,0.08), transparent),
-                radial-gradient(2px 2px at 80% 60%, rgba(196, 76, 255, 0.10), transparent),
-                radial-gradient(2px 2px at 10% 80%, rgba(255,215,0,0.06), transparent),
-                radial-gradient(3px 3px at 90% 10%, rgba(196, 76, 255, 0.08), transparent);
-            background-size: 200% 200%;
-            animation: nebulaDrift 40s ease-in-out infinite alternate;
-        }
-        @keyframes nebulaDrift {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
-        .stApp::after {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 0;
-            pointer-events: none;
-            background-image:
-                radial-gradient(2px 2px at 10% 10%, #ffd700, transparent),
-                radial-gradient(3px 3px at 30% 40%, #ffd700, transparent),
-                radial-gradient(2px 2px at 50% 80%, #ffd700, transparent),
-                radial-gradient(4px 4px at 70% 20%, #ffd700, transparent),
-                radial-gradient(2px 2px at 90% 60%, #ffd700, transparent),
-                radial-gradient(3px 3px at 15% 90%, #ffd700, transparent),
-                radial-gradient(2px 2px at 85% 15%, #ffd700, transparent),
-                radial-gradient(4px 4px at 45% 50%, #ffd700, transparent);
-            background-size: 250% 250%;
-            animation: starFall 30s linear infinite;
-            opacity: 0.6;
-        }
-        @keyframes starFall {
-            0% { background-position: 0% -10%; }
-            100% { background-position: 100% 110%; }
         }
         .main, .block-container { position: relative; z-index: 1; }
         .glass-card {
@@ -566,15 +522,10 @@ def show_results():
             margin-bottom: 1.5rem !important;
             transition: all 0.3s ease;
         }
-        .glass-card:hover {
-            border-color: rgba(255, 215, 0, 0.5) !important;
-            box-shadow: 0 8px 40px rgba(255,215,0,0.15) !important;
-        }
         h1, h2, h3, .main-title {
             font-family: 'Cinzel', serif !important;
             color: #ffd700 !important;
             text-shadow: 0 0 30px rgba(255,215,0,0.2), 0 0 60px rgba(255,215,0,0.1);
-            letter-spacing: 1px;
         }
         .main-title {
             font-size: 3.2rem !important;
@@ -593,44 +544,12 @@ def show_results():
             color: #ffd700 !important;
             font-family: 'Cinzel', serif !important;
             padding: 0.6rem 1.8rem !important;
-            transition: all 0.4s ease !important;
-            box-shadow: 0 0 15px rgba(255,215,0,0.1) !important;
-            backdrop-filter: blur(4px);
         }
-        .stButton > button:hover {
-            background: rgba(255, 215, 0, 0.2) !important;
-            border-color: #ffd700 !important;
-            box-shadow: 0 0 40px rgba(255,215,0,0.3), 0 0 80px rgba(255,215,0,0.1) !important;
-            transform: scale(1.03);
-            color: #fff8e0 !important;
-        }
-        .stTabs [role="tablist"] { border-bottom: 1px solid rgba(255,215,0,0.2); }
         .stTabs [role="tab"] {
             font-family: 'Cinzel', serif;
             color: #b8a8e0 !important;
-            padding: 0.5rem 1.2rem !important;
-            border-radius: 20px 20px 0 0;
-            transition: 0.3s;
-        }
-        .stTabs [role="tab"]:hover { color: #ffd700 !important; background: rgba(255,215,0,0.05); }
-        .stTabs [role="tab"][aria-selected="true"] {
-            color: #ffd700 !important;
-            border-bottom: 2px solid #ffd700 !important;
-            background: rgba(255,215,0,0.05);
-        }
-        .stAlert {
-            background: rgba(20, 15, 40, 0.5) !important;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,215,0,0.15);
-            border-radius: 16px;
-            color: #e0d0ff;
         }
         .deco-star { display: inline-block; font-size: 1.4rem; margin: 0 6px; color: #ffd700; opacity: 0.6; filter: drop-shadow(0 0 6px #ffd700); }
-        .block-container { animation: fadeIn 1.2s ease-out; }
-        @keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
-        #MainMenu {visibility: hidden;}
-        footer {visibility: hidden;}
-        header {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
 
